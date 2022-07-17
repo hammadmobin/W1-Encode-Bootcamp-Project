@@ -22,9 +22,9 @@
 | Proposals |
 | --- | 
 | Apple |
-
+| --- | 
 | Banana | 
-
+| --- | 
 | Mango |
 
 
