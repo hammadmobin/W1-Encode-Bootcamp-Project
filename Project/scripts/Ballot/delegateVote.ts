@@ -55,6 +55,7 @@ async function main() {
     else if(Number((await ballotContract.voters(voterAddress)).weight) < 1)
     throw new Error("Voters cannot delegate to wallets that cannot vote.");
 
+    console.log(`Voter at address ${wallet.address} delegate vote to ${voterAddress} `)
 
   const tx = await ballotContract.delegate(voterAddress);
 
