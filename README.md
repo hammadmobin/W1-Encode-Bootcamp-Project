@@ -11,3 +11,6 @@
 * Run the scripts with a set of proposals, cast and delegate votes and inspect results
 * Write a report detailing the addresses, transaction hashes, description of the operation script being executed and console output from script execution for each step (Deployment, giving voting rights, casting/delegating and querying results).
 * (Extra) Use TDD methodology
+
+
+# (Group no# : 9 Members)
