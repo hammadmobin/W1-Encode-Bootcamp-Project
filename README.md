@@ -20,7 +20,7 @@
 * 
 
 | Proposals |
-
+| --- | 
 | Apple |
 
 | Banana | 
