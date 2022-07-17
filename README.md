@@ -42,6 +42,7 @@
 # Scripts
 
 ## Deploy
+![Test Image 1](img/Deployed.png)
 
 ## Query proposals
 
