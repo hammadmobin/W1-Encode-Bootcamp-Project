@@ -25,39 +25,34 @@ async function main() {
   const balance = Number(ethers.utils.formatEther(balanceBN));
 
   console.log(`Wallet balance ${balance}`);
-
   if (balance < 0.01) {
     throw new Error("Not enough ether");
   }
 
   if (process.argv.length < 3) throw new Error("Ballot address missing");
   const ballotAddress = process.argv[2];
-  if (process.argv.length < 4) throw new Error("Voter address missing");
-  const voterAddress = process.argv[3];
+  if (process.argv.length < 4) throw new Error("Proposal number is missing");
+
+  const proposalNumber = process.argv[3];
   console.log(
     `Attaching ballot contract interface to address ${ballotAddress}`
   );
+
   const ballotContract: Ballot = new Contract(
     ballotAddress,
     ballotJson.abi,
     signer
   ) as Ballot;
 
-  if ((await ballotContract.voters(wallet.address)).voted == true)
-    throw new Error("you already voted !");
-  if (wallet.address == voterAddress)
-    throw new Error("Self-delegation is disallowed.");
-  else if ((await ballotContract.voters(voterAddress)).voted == true)
-    throw new Error("Delegation Voter already voted ! ");
-  else if (Number((await ballotContract.voters(voterAddress)).weight) < 1)
-    throw new Error("Voters cannot delegate to wallets that cannot vote.");
-
-    console.log(`Voter at address ${wallet.address} delegate vote to ${voterAddress} `)
-    const tx = await ballotContract.delegate(voterAddress);
-
-  console.log("Awaiting confirmations");
-  await tx.wait();
-  console.log(`Transaction completed. Hash: ${tx.hash}`);
+    if((await ballotContract.voters(signer.address)).voted == true)
+    throw new Error("Voter already vote!");
+    else if(Number((await ballotContract.voters(signer.address)).weight) < 0)
+    throw new Error("Voter have no rights to vote!");
+ 
+    const tx = await ballotContract.vote(proposalNumber);
+     console.log("Awaiting confirmations");
+    await tx.wait();
+    console.log(`Transaction completed. Hash: ${tx.hash}`);
 }
 
 main().catch((error) => {

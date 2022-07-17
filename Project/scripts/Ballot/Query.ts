@@ -25,8 +25,6 @@ async function main() {
   }
   if (process.argv.length < 3) throw new Error("Ballot address missing");
   const ballotAddress = process.argv[2];
-  if (process.argv.length < 4) throw new Error("Voter address missing");
-  const voterAddress = process.argv[3];
   
   console.log(
     `Attaching ballot contract interface to address ${ballotAddress}`

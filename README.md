@@ -42,13 +42,35 @@
 # Scripts
 
 ## Deploy
+First, we deployed the smart contract as a ballot to interact with it and assign chairperson.
+
+![Deployed](img/Deployed.png)
 
 ## Query proposals
+Here, we just make query that give us proposals vote count and name.
+
+![QueryProposals](img/QueryProposals.png)
 
 ## Give vote right passing an address as input
+After assigning of the chairperson , Chairpeson have access to the give the rights to vote to someone.
+
+![giveVoteRights](img/giveVoteRights.png)
 
 ## Cast a vote to a ballot passing contract address and proposal as input and using the wallet in environment
+In this scenario, voter give a vote to the proposal.
+
+![castVote](img/castVote.png)
 
 ## Delegate my vote passing  user address as input and using the wallet in environment
+Here, voter can delegate vote.
+
+![DelegateVote](img/DelegateVote.png)
 
 ## Query voting result and print to console
+Its shows us the winning proposal, who got most vote.
+
+![winingProposal](img/winingProposal.png)
+
+## EtherScan Transaction Explorer 
+![etherScan](img/etherScan.png)
+
