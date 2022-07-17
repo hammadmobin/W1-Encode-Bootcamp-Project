@@ -20,11 +20,8 @@
 * 
 
 | Proposals |
-| :---: | 
 | Apple |
-| :---: | 
-| Banana |
-| :---: | 
+| Banana | 
 | Mango |
 
 
