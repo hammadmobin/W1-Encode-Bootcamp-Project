@@ -15,6 +15,9 @@
 
 # (Group#9 Members)
 * Muhammad Hammad Mobin (@hammadmobin#3911)
+* Ece Metin (@ece#1887)
+* Udi İbgui (@udi#5722)
+* 
 
 # Scripts
 
@@ -29,4 +32,3 @@
 ## Delegate my vote passing  user address as input and using the wallet in environment
 
 ## Query voting result and print to console
-
