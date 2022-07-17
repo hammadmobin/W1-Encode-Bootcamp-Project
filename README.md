@@ -67,7 +67,7 @@ Here, voter can delegate vote.
 ![DelegateVote](img/DelegateVote.png)
 
 ## Query voting result and print to console
-Its shows us the wining proposal, who get most vote.
+Its shows us the winning proposal, who got most vote.
 
 ![winingProposal](img/winingProposal.png)
 
