@@ -20,8 +20,11 @@
 * 
 
 | Proposals |
+
 | Apple |
+
 | Banana | 
+
 | Mango |
 
 
