@@ -19,10 +19,13 @@
 * Udi İbgui (@udi#5722)
 * 
 
-| Attempt | #1 | #2 |
-| :---: | :---: | :---: |
-| Seconds | 301 | 283 |
-
+| Proposals |
+| :---: | 
+| Apple |
+| :---: | 
+| Banana |
+| :---: | 
+| Mango |
 
 
 # Scripts
