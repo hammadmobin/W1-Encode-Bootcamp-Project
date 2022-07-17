@@ -95,8 +95,14 @@ describe("Ballot", function () {
 
   describe("when the voter interact with the delegate function in the contract", function () {
     // TODO
-    it("is not implemented", async function () {
-      throw new Error("Not implemented");
+    it("if the voter already voted not allowed to delegate vote", async function () {
+      const delegateVoterAddress = accounts[1].address;
+      await ballotContract.vote(0);
+      await expect(ballotContract.delegate(delegateVoterAddress)).to.be.revertedWith("You already voted.");    
+    });
+    it("self-delegation are disallowed", async function () {
+      const voterAddress = accounts[1].address;
+      await expect(ballotContract.connect(accounts[1]).delegate(voterAddress)).to.be.revertedWith("Self-delegation is disallowed.");    
     });
   });
 
