@@ -20,9 +20,9 @@
 * 
 ChairPerson | 0x6D4BA6307655015ece111A68cbC997de1aFd77B8 | 
 
-| Attempt | #1 | #2 |
-| :---: | :---: | :---: |
-| Seconds | 301 | 283 |
+|ChairPerson| Ballot | 
+| :---: | :---: | 
+| 0x6D4BA6307655015ece111A68cbC997de1aFd77B8 | 0xF721B0DAa67e5AF24b6EDa24c461eE7E13A1Fe83 |
 
 | Proposals |
 | --- | 
