@@ -45,17 +45,15 @@ async function main() {
     ballotJson.abi,
     signer
   ) as Ballot;
-    const va = await ballotContract.voters(wallet.address)
-    if(va.voted == true)
+
+    if((await ballotContract.voters(wallet.address)).voted == true)
     throw new Error("you already voted !");
-    
-    if (wallet.address == voterAddress)
+     if (wallet.address == voterAddress)
     throw new Error("Self-delegation is disallowed.");
-
-    const da = await ballotContract.voters(voterAddress)
-
-    if(da.voted == true)
-    throw new Error("Voter already voted ! ");
+    else if((await ballotContract.voters(voterAddress)).voted == true)
+    throw new Error("Delegation Voter already voted ! ");
+    else if(Number((await ballotContract.voters(voterAddress)).weight) < 1)
+    throw new Error("Voters cannot delegate to wallets that cannot vote.");
 
 
   const tx = await ballotContract.delegate(voterAddress);
