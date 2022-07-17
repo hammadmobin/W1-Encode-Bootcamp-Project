@@ -1,8 +1,9 @@
 import { Contract, ethers } from "ethers";
 import "dotenv/config";
-import * as ballotJson from "../../artifacts/contracts/Ballot.sol/Ballot.json";
+import * as ballotJSON from "../artifacts/contracts/Ballot.sol/Ballot.json";
 // eslint-disable-next-line node/no-missing-import
-import { Ballot } from "../../typechain";
+import { Ballot } from "../typechain-types";
+import { expect } from "chai";
 
 // This key is already public on Herong's Tutorial Examples - v1.03, by Dr. Herong Yang
 // Do never expose your keys like this
@@ -15,44 +16,46 @@ async function main() {
       ? ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
       : new ethers.Wallet(process.env.PRIVATE_KEY ?? EXPOSED_KEY);
   console.log(`Using address ${wallet.address}`);
-
   const provider = ethers.providers.getDefaultProvider("ropsten");
-
   const signer = wallet.connect(provider);
+  const balance = await signer.getBalance();
+  const decimal = parseFloat(ethers.utils.formatEther(balance));
+  console.log(`Wallet balance ${decimal}`);
 
-  const balanceBN = await signer.getBalance();
-
-  const balance = Number(ethers.utils.formatEther(balanceBN));
-
-  console.log(`Wallet balance ${balance}`);
-  if (balance < 0.01) {
+  if (decimal < 0.01) {
     throw new Error("Not enough ether");
   }
 
   if (process.argv.length < 3) throw new Error("Ballot address missing");
   const ballotAddress = process.argv[2];
-  if (process.argv.length < 4) throw new Error("Proposal number is missing");
-
-  const proposalNumber = process.argv[3];
-  console.log(
-    `Attaching ballot contract interface to address ${ballotAddress}`
-  );
+  if (process.argv.length < 4) throw new Error("Proposal to vote on missing");
+  const proposalInput = process.argv[3];
+  console.log(`Ballot address ${ballotAddress}`);
 
   const ballotContract: Ballot = new Contract(
     ballotAddress,
-    ballotJson.abi,
+    ballotJSON.abi,
     signer
   ) as Ballot;
 
-    if((await ballotContract.voters(signer.address)).voted == true)
-    throw new Error("Voter already vote!");
-    else if(Number((await ballotContract.voters(signer.address)).weight) < 0)
-    throw new Error("Voter have no rights to vote!");
- 
-    const tx = await ballotContract.vote(proposalNumber);
-     console.log("Awaiting confirmations");
-    await tx.wait();
-    console.log(`Transaction completed. Hash: ${tx.hash}`);
+  const proposalNumber = parseInt(proposalInput);
+  const voter = await ballotContract.voters(signer.address);
+  console.log(`Voted - ${voter.voted}`);
+
+  if (voter.weight.toNumber() < 1) {
+    throw new Error("Voter doesnt have right to vote");
+  }
+  if (voter.voted === true) {
+    throw new Error("Address already voted");
+  }
+  const proposal = await ballotContract.proposals(proposalNumber);
+  console.log(`Proposal current total Votes: ${proposal.voteCount}`);
+  const vote = await ballotContract.connect(signer).vote(proposalNumber);
+  console.log("Awaiting tx confirmation..");
+  await vote.wait();
+  console.log(`Transaction done - Hash: ${vote.hash}`);
+  const proposalDone = await ballotContract.proposals(proposalNumber);
+  console.log(`Proposal total Votes: ${proposalDone.voteCount}`);
 }
 
 main().catch((error) => {
