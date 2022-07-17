@@ -4,7 +4,6 @@ import * as ballotJson from "../../artifacts/contracts/Ballot.sol/Ballot.json";
 // eslint-disable-next-line node/no-missing-import
 import { Ballot } from "../../typechain";
 
-
 // This key is already public on Herong's Tutorial Examples - v1.03, by Dr. Herong Yang
 // Do never expose your keys like this
 const EXPOSED_KEY =
@@ -16,7 +15,6 @@ async function main() {
       ? ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
       : new ethers.Wallet(process.env.PRIVATE_KEY ?? EXPOSED_KEY);
   console.log(`Using address ${wallet.address}`);
-
 
   const provider = ethers.providers.getDefaultProvider("ropsten");
 
@@ -32,7 +30,6 @@ async function main() {
     throw new Error("Not enough ether");
   }
 
-
   if (process.argv.length < 3) throw new Error("Ballot address missing");
   const ballotAddress = process.argv[2];
   if (process.argv.length < 4) throw new Error("Voter address missing");
@@ -46,28 +43,24 @@ async function main() {
     signer
   ) as Ballot;
 
-    if((await ballotContract.voters(wallet.address)).voted == true)
+  if ((await ballotContract.voters(wallet.address)).voted == true)
     throw new Error("you already voted !");
-     if (wallet.address == voterAddress)
+  if (wallet.address == voterAddress)
     throw new Error("Self-delegation is disallowed.");
-    else if((await ballotContract.voters(voterAddress)).voted == true)
+  else if ((await ballotContract.voters(voterAddress)).voted == true)
     throw new Error("Delegation Voter already voted ! ");
-    else if(Number((await ballotContract.voters(voterAddress)).weight) < 1)
+  else if (Number((await ballotContract.voters(voterAddress)).weight) < 1)
     throw new Error("Voters cannot delegate to wallets that cannot vote.");
 
     console.log(`Voter at address ${wallet.address} delegate vote to ${voterAddress} `)
-
-  const tx = await ballotContract.delegate(voterAddress);
+    const tx = await ballotContract.delegate(voterAddress);
 
   console.log("Awaiting confirmations");
   await tx.wait();
   console.log(`Transaction completed. Hash: ${tx.hash}`);
 }
 
-
-
-
 main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-  });
+  console.error(error);
+  process.exitCode = 1;
+});
