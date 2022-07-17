@@ -42,14 +42,19 @@
 # Scripts
 
 ## Deploy
-![Test Image 1](img/Deployed.png)
+![Deployed](img/Deployed.png)
 
 ## Query proposals
+![QueryProposals](img/QueryProposals.png)
 
 ## Give vote right passing an address as input
+![giveVoteRights](img/giveVoteRights.png)
 
 ## Cast a vote to a ballot passing contract address and proposal as input and using the wallet in environment
+![castVote](img/castVote.png)
 
 ## Delegate my vote passing  user address as input and using the wallet in environment
+![DelegateVote](img/DelegateVote.png)
 
 ## Query voting result and print to console
+![winingProposal](img/winingProposal.png)
