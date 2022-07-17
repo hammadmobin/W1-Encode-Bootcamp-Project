@@ -42,7 +42,7 @@
 # Scripts
 
 ## Deploy
-First, we deployed the smart contract as a ballot to interact with it and assign chairperson.
+First, we deployed the smart contract as a ballot to interact with it and assign the chairperson.
 
 ![Deployed](img/Deployed.png)
 
