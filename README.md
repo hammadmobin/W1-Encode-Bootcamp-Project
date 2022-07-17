@@ -27,7 +27,7 @@
 
 
 | Voters | Address | 
-| --- | Address |
+| --- | --- | 
 | 1 | Address |
 | 2 | Address |
 | 3 | Address |
