@@ -100,10 +100,16 @@ describe("Ballot", function () {
       await ballotContract.vote(0);
       await expect(ballotContract.delegate(delegateVoterAddress)).to.be.revertedWith("You already voted.");    
     });
-    it("self-delegation are disallowed", async function () {
-      const voterAddress = accounts[1].address;
-      await expect(ballotContract.connect(accounts[1]).delegate(voterAddress)).to.be.revertedWith("Self-delegation is disallowed.");    
+    it("should not allowed self-delegation", async function () {
+      const voterAddress = accounts[0].address;
+      await expect(ballotContract.delegate(voterAddress)).to.be.revertedWith("Self-delegation is disallowed.");    
     });
+
+    it("should not allowed person that has no rights to vote", async function () {
+      const voterAddress = accounts[1].address;
+      await expect(ballotContract.delegate(voterAddress)).to.be.revertedWith("");    
+    });
+
   });
 
   describe("when the an attacker interact with the giveRightToVote function in the contract", function () {
