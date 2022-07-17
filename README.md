@@ -15,3 +15,6 @@
 
 # (Group#9 Members)
 * Muhammad Hammad Mobin (@hammadmobin#3911)
+* Ece Metin (@ece#1887)
+* Udi İbgui (@udi#5722)
+* 
