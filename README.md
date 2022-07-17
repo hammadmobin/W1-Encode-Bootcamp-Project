@@ -16,3 +16,17 @@
 # (Group#9 Members)
 * Muhammad Hammad Mobin (@hammadmobin#3911)
 
+# Scripts
+
+## Deploy
+
+## Query proposals
+
+## Give vote right passing an address as input
+
+## Cast a vote to a ballot passing contract address and proposal as input and using the wallet in environment
+
+## Delegate my vote passing  user address as input and using the wallet in environment
+
+## Query voting result and print to console
+
