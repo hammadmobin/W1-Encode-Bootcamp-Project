@@ -18,7 +18,8 @@
 * Ece Metin (@ece#1887)
 * Udi İbgui (@udi#5722)
 * 
-| ChairPerson | 0x6D4BA6307655015ece111A68cbC997de1aFd77B8 | 
+ChairPerson | 0x6D4BA6307655015ece111A68cbC997de1aFd77B8 | 
+ 
 
 | Proposals |
 | --- | 
