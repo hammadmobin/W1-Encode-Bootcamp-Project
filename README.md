@@ -32,11 +32,11 @@
 
 | Voters | Address | 
 | --- | --- | 
-| 1 | Address |
-| 2 | Address |
-| 3 | Address |
-| 4 | Address |
-| 5 | Address |
+| 1 | 0xD57Dd86515976b41c49ba1474e1b0F34dD2527ba|
+| 2 | 0x3Db98A6E502C8c206e637801C948ea332473CB46 |
+| 3 | 0x30122e077f55E61a5073b348Db3207Ec66da309B |
+| 4 | 0xe3Bb54D8BE132243470e1488b804042AA3A5Ff1C |
+| 5 | 0x63Fe9715D4627393D922872f31f8a6CaAE96EcD5 (Delegate) |
 
 
 # Scripts
