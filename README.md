@@ -47,7 +47,7 @@ First, we deployed the smart contract as a ballot to interact with it and assign
 ![Deployed](img/Deployed.png)
 
 ## Query proposals
-Here, we just make query proposals vote and name.
+Here, we just make query that give us proposals vote count and name.
 
 ![QueryProposals](img/QueryProposals.png)
 
