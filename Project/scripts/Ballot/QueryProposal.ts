@@ -4,6 +4,7 @@ import * as ballotJson from "../../artifacts/contracts/Ballot.sol/Ballot.json";
 // eslint-disable-next-line node/no-missing-import
 import { Ballot } from "../../typechain";
 
+
 // This key is already public on Herong's Tutorial Examples - v1.03, by Dr. Herong Yang
 // Do never expose your keys like this
 const EXPOSED_KEY =
@@ -14,7 +15,7 @@ async function main() {
     process.env.MNEMONIC && process.env.MNEMONIC.length > 0
       ? ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
       : new ethers.Wallet(process.env.PRIVATE_KEY ?? EXPOSED_KEY);
-  console.log(Using address ${wallet.address});
+      console.log(`Using address ${wallet.address}`);
 
 
   const provider = ethers.providers.getDefaultProvider("ropsten");
@@ -25,8 +26,8 @@ async function main() {
 
   const balance = Number(ethers.utils.formatEther(balanceBN));
 
-  console.log(Wallet balance ${balance});
-
+  console.log(`Wallet balance ${balance}`);
+ 
   if (balance < 0.01) {
     throw new Error("Not enough ether");
   }
@@ -38,8 +39,9 @@ async function main() {
   const ProposalNumber = process.argv[3];
 
   console.log(
-    Attaching ballot contract interface to address ${ballotAddress}
+    `Attaching ballot contract interface to address ${ballotAddress}`
   );
+
   const ballotContract: Ballot = new Contract(
     ballotAddress,
     ballotJson.abi,
@@ -56,10 +58,3 @@ main().catch((error) => {
     console.error(error);
     process.exitCode = 1;
   });
-
-if (process.argv.length < 4 ) throw new Error("Proposal missing");
-  const ProposalNumber = process.argv[2];
-
- const proposal = await ballotContract.proposals(ProposalNumber);
- console.log('Proposal Name :  'ethers.utils.parseBytes32String(proposal.name));
- console.log('Proposal Vote Count :  'proposal.voteCount); 
