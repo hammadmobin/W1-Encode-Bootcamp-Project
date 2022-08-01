@@ -8,63 +8,61 @@ import { Ballot } from "../../typechain";
 // This key is already public on Herong's Tutorial Examples - v1.03, by Dr. Herong Yang
 // Do never expose your keys like this
 const EXPOSED_KEY =
-  "8da4ef21b864d2cc526dbdb2a120bd2874c36c9d0a1fb7f8c63d7f7a8b41de8f";
+    "8da4ef21b864d2cc526dbdb2a120bd2874c36c9d0a1fb7f8c63d7f7a8b41de8f";
 
 async function main() {
-  const wallet =
-    process.env.MNEMONIC && process.env.MNEMONIC.length > 0
-      ? ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
-      : new ethers.Wallet(process.env.PRIVATE_KEY ?? EXPOSED_KEY);
-  console.log(`Using address ${wallet.address}`);
+    const wallet =
+        process.env.MNEMONIC && process.env.MNEMONIC.length > 0
+            ? ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
+            : new ethers.Wallet(process.env.PRIVATE_KEY ?? EXPOSED_KEY);
+      console.log(`Using address ${wallet.address}`);
 
 
-  const provider = ethers.providers.getDefaultProvider("ropsten");
+    const provider = ethers.providers.getDefaultProvider("ropsten");
 
-  const signer = wallet.connect(provider);
+    const signer = wallet.connect(provider);
 
-  const balanceBN = await signer.getBalance();
+    const balanceBN = await signer.getBalance();
 
-  const balance = Number(ethers.utils.formatEther(balanceBN));
+    const balance = Number(ethers.utils.formatEther(balanceBN));
 
-  console.log(`Wallet balance ${balance}`);
+    console.log(`Wallet balance ${balance}`);
 
-  if (balance < 0.01) {
-    throw new Error("Not enough ether");
-  }
+    if (balance < 0.01) {
+        throw new Error("Not enough ether");
+    }
 
 
-  if (process.argv.length < 3) throw new Error("Ballot address missing");
-  const ballotAddress = process.argv[2];
-  if (process.argv.length < 4) throw new Error("Voter address missing");
-  const voterAddress = process.argv[3];
-  console.log(
-    `Attaching ballot contract interface to address ${ballotAddress}`
-  );
-  const ballotContract: Ballot = new Contract(
-    ballotAddress,
-    ballotJson.abi,
-    signer
-  ) as Ballot;
+    if (process.argv.length < 3) throw new Error("Ballot address missing");
+    const ballotAddress = process.argv[2];
+    if (process.argv.length < 4) throw new Error("Voter address missing");
+    const voterAddress = process.argv[3];
+    console.log(
+        `Attaching ballot contract interface to address ${ballotAddress}`
+    );
+    const ballotContract: Ballot = new Contract(
+        ballotAddress,
+        ballotJson.abi,
+        signer
+    )   as Ballot;
 
-    if((await ballotContract.voters(wallet.address)).voted == true)
-    throw new Error("you already voted !");
-     if (wallet.address == voterAddress)
-    throw new Error("Self-delegation is disallowed.");
-    else if((await ballotContract.voters(voterAddress)).voted == true)
-    throw new Error("Delegation Voter already voted ! ");
-    else if(Number((await ballotContract.voters(voterAddress)).weight) < 1)
-    throw new Error("Voters cannot delegate to wallets that cannot vote.");
+        if((await ballotContract.voters(wallet.address)).voted == true)
+        throw new Error("you already voted !");
+         if (wallet.address == voterAddress)
+        throw new Error("Self-delegation is disallowed.");
+        else if((await ballotContract.voters(voterAddress)).voted == true)
+        throw new Error("Delegation Voter already voted ! ");
+        else if(Number((await ballotContract.voters(voterAddress)).weight) < 1)
+        throw new Error("Voters cannot delegate to wallets that cannot vote.");
 
-    console.log(`Voter at address ${wallet.address} delegate vote to ${voterAddress} `)
+        console.log(`Voter at address ${wallet.address} delegate vote to ${voterAddress} `)
 
-  const tx = await ballotContract.delegate(voterAddress);
+    const tx = await ballotContract.delegate(voterAddress);
 
-  console.log("Awaiting confirmations");
-  await tx.wait();
-  console.log(`Transaction completed. Hash: ${tx.hash}`);
+    console.log("Awaiting confirmations");
+    await tx.wait();
+    console.log(`Transaction completed. Hash: ${tx.hash}`);
 }
-
-
 
 
 main().catch((error) => {
