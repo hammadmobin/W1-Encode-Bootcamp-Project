@@ -4,7 +4,6 @@ import * as ballotJson from "../../artifacts/contracts/Ballot.sol/Ballot.json";
 // eslint-disable-next-line node/no-missing-import
 import { Ballot } from "../../typechain";
 
-
 // This key is already public on Herong's Tutorial Examples - v1.03, by Dr. Herong Yang
 // Do never expose your keys like this
 const EXPOSED_KEY =
@@ -16,7 +15,6 @@ async function main() {
       ? ethers.Wallet.fromMnemonic(process.env.MNEMONIC)
       : new ethers.Wallet(process.env.PRIVATE_KEY ?? EXPOSED_KEY);
   console.log(`Using address ${wallet.address}`);
-
 
   const provider = ethers.providers.getDefaultProvider("ropsten");
 
@@ -31,7 +29,6 @@ async function main() {
   if (balance < 0.01) {
     throw new Error("Not enough ether");
   }
-
 
   if (process.argv.length < 3) throw new Error("Ballot address missing");
   const ballotAddress = process.argv[2];
@@ -63,8 +60,6 @@ async function main() {
   await tx.wait();
   console.log(`Transaction completed. Hash: ${tx.hash}`);
 }
-
-
 
 
 main().catch((error) => {
